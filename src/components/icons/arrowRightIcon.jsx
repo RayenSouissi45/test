@@ -1,7 +1,7 @@
 function ArrowRightIcon () {
     return (
         <svg
-                        className="h-6 pl-4 pt-1"
+                        className="h-6 pl-2"
                         fill="none"
                         stroke="currentColor"
                         strokeWidth="1.5"

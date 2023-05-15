@@ -1,39 +1,96 @@
-function OrderGlobalView () {
-    return (
-      
-<div className=" bg-white  rounded-lg flex-grow ml-8 w-[672px] ">
-                <div className="flex flex-row items-center py-8 px-2 bg-white h-28 mx-2 mr-4 space-x-32 ml-6">
-                  <div className="flex flex-row">
-                    <div className="col3 w-4 h-8 rounded-md" />
-                    <b>
-                      <h5 className="text-lg tracking-wider pl-2 pr-24">
-                        Vue Globale des commandes 
-                      </h5>
-                    </b>
-                  </div>
-                  <button className="bg-white hover:bg-gray-50 text-gray-500 font-bold  px-4 flex flex-row border rounded-xl ml-80 w-48 ">
-                    <p>Cette Semaine</p>
-                    <div className="pb-2 pl-2 ml-2">
-                      <svg
-                        className="h-5 w-5 inline-block"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M3.29289 6.29289C3.65338 5.93241 4.22061 5.90468 4.6129 6.2097L4.70711 6.29289L10 11.585L15.2929 6.29289C15.6534 5.93241 16.2206 5.90468 16.6129 6.2097L16.7071 6.29289C17.0676 6.65338 17.0953 7.22061 16.7903 7.6129L16.7071 7.70711L10 14.4142L3.29289 7.70711C2.93241 7.34662 2.90468 6.77939 3.2097 6.3871L3.29289 6.29289Z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                    </div>
-                  </button>
-                </div>
-                {/* diagramme */}
-                <div className="h-2  w-auto ml-8 mr-2 ">
-                  <div id="chart_div" className="chart" />
-                </div>
-              </div>
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Cell } from "recharts";
+import { useState, useEffect } from "react";
+import ColoredRectangle from "../coloredRectangle";
+import SimpleButton from "../button/simpleButton";
+import DownIcon from "../icons/DownIcon";
 
-    )
+function Test() {
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  useEffect(() => {
+    const handleWindowResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleWindowResize);
+
+    return () => {
+      window.removeEventListener("resize", handleWindowResize);
+    };
+  });
+  const data = [
+    { name: windowWidth > 375 ? "Lundi" : "Lun", pv: 26 },
+    { name: windowWidth > 375 ? "Mardi" : "Mar", pv: 20 },
+    { name: windowWidth > 375 ? "Mercredi" : "Merc", pv: 30 },
+    { name: windowWidth > 375 ? "Jeudi" : "Jeu", pv: 18 },
+    { name: windowWidth > 375 ? "Vendredi" : "Vend", pv: 26 },
+    { name: windowWidth > 375 ? "Samedi" : "Same", pv: 15 },
+    { name: windowWidth > 375 ? "Dimanche" : "Dim", pv: 23 }
+  ];
+  const barColors = {
+    Lundi: "#64c99f",
+    Mardi: "#fca652",
+    Mercredi: "#64c99f",
+    Jeudi: "#64c99f",
+    Vendredi: "#64c99f",
+    Samedi: "#fca652",
+    Dimanche: "#64c99f",
+    Lun: "#64c99f",
+    Mar: "#fca652",
+    Merc: "#64c99f",
+    Jeu: "#64c99f",
+    Vend: "#64c99f",
+    Same: "#fca652",
+    Dim: "#64c99f"
+  };
+  
+
+  return (
+    <div className=" bg-white ">
+      <div className={`  ${windowWidth <= 375 ? 'space-x-10' : windowWidth <1024 ?  'space-x-32 ' : "space-x-[210px]"} justify-center	 items-center flex flex-row w-full h-20`}>
+        <div className="flex flex-row">
+          <ColoredRectangle color={"bg-purple-100"}/>
+          <h1 className="text-xl font-semibold">{ windowWidth > 375 ? "Vu Global des commandes" :"Commandes"}</h1>
+        </div>
+        <div>
+        <SimpleButton text='Cette semaine' width="w-[150px]">
+                <DownIcon/>
+              </SimpleButton>
+        </div>
+
+        
+
+      </div>
+      <style>{`.recharts-cartesian-axis-line { display: none; }`}</style>
+      <div className="">
+      <ResponsiveContainer width={windowWidth > 1024 ? 672 : windowWidth > 375 ? 560 : 343 } height={440} >
+        <BarChart
+          width={500}
+          height={300}
+          data={data}
+          margin={{ top: 5, right: windowWidth <= 1024 ? 14 : 30, left: -30, bottom: 5 }}
+          
+       
+        >
+        {/* <BarChart className={` ${data=data} h-[300px] w-[500px]`}/> */}
+          
+          <XAxis dataKey="name" />
+          <YAxis />
+          <Tooltip />
+          
+          <Bar dataKey="pv" barSize={40} >
+          {data.map((entry, index) => (
+              <Cell
+              key={`cell-${index}`}
+              fill={barColors[entry.name]}
+            />
+            ))}
+          </Bar>
+          
+        </BarChart>
+      </ResponsiveContainer>
+      </div>
+    </div>
+  );
 }
-export default OrderGlobalView ;
+
+export default Test;

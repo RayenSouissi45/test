@@ -1,7 +1,7 @@
 function NavbarFormIcon () {
     return (
         <svg
-                  className="absolute h-6 w-6 left-2 top-1/2 transform -translate-y-1/2 text-gray-400"
+        className=" h-6 w-6  text-gray-500"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"

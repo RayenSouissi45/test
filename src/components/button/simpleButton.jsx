@@ -1,8 +1,8 @@
-function SimpleButton ({text,children}) {
+function SimpleButton ({text,children, width="w-[160px]"}) {
     return (
-      <button className="bg-white hover:bg-gray-50 text-gray-500 font-bold  px-4 flex flex-row border rounded-xl ml-80  ">
+      <button className={`bg-white hover:bg-gray-50 text-gray-500 font-bold ${width} p-2 flex flex-row border rounded-xl  `}>
       <p>{text}</p>
-      <div className="pb-2 pl-2 ml-2">
+      <div className="">
       {children}
       </div>
     </button>

@@ -3,18 +3,19 @@ import Increase from "../increase/increase";
 
 
 
-function ClientCart({state,percentNumber}) {
+function ClientCart({customer}) {
     return (
-        <div className="flex flex-row mt-12  h-[84px] border-b  ">
-                  <div className="flex-row w-[42px] h-[57px] rounded-full  ml-12">
+        <div className="flex flex-row mt-12  h-[84px] border-b ">
+                  <div className="flex-row w-[57px] h-[57px] rounded-full  ml-7 mr-2 ">
                     <img
-                      className="w-16 h-16 rounded-full"
-                      src="https://xsgames.co/randomusers/assets/avatars/male/74.jpg"
+                      className="w-[57px] h-[57px] rounded-full"
+                      src={customer.picture}
+                      alt="client"
                     />
                   </div>
-                  <div className="flex flex-col">
+                  <div className="flex flex-col ">
                     <b>
-                      <p className="pl-4 pt-2">Hazem Abid</p>
+                      <p className="pl-4 pt-2">{customer.nom}</p>
                     </b>
                     <p className="pl-4 pt-2 text-xs">hazeabidi@gmail.com</p>
                   </div>
@@ -28,10 +29,10 @@ function ClientCart({state,percentNumber}) {
                     <Decrease percentNumber='2' color="bg-white" />
                     </div> */}
                      <div className="ml-4 mt-2">
-                     {state === 'decrease' ? (
-                     <Decrease percentNumber={percentNumber} color="bg-white" />
+                     {customer.state === 'decrease' ? (
+                     <Decrease percentNumber={customer.percentNumber} color="bg-white" />
                        ) : (
-                       <Increase percentNumber={percentNumber}  />
+                       <Increase percentNumber={customer.percentNumber}  />
                           )}
                         </div>
                   </div>

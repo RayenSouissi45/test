@@ -1,12 +1,14 @@
 import { Route } from 'react-router-dom';
-import Dashboard from '../pages/Dashboard';
-import Test from '../pages/Test';
+import Dashboard from '../pages/dashboard';
+import Test from '../pages/test';
+// import SignIn from '../pages/signIn';
 
 function Routes() {
   return (
     <>
       <Route path="/" element={<Dashboard />} />
       <Route path="/test" element={<Test />} />
+      {/* <Route path="/SignIn" element={<SignIn />} /> */}
     </>
   );
 }
